@@ -1,2 +1,2 @@
 # alderman-attendance
-The data work for the alderman attendance story
+The data work for the South Side Weekly's alderman attendance story
