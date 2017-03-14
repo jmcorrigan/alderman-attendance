@@ -43,6 +43,7 @@ Alderman Attendance Documentation
 
 7. Open all_meetings.csv
 	- In column C, replace ‘1’ with ’not recorded’ and ‘0’ with ‘recorded’
+	- Remove dupes
 
 
 
