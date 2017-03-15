@@ -3,7 +3,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 page_num = 1
-writer = csv.writer(open('who_there.csv', 'w'))
+writer = csv.writer(open('/data/raw_data/who_there.csv', 'w'))
 search_url = "http://ocd.datamade.us/events/?jurisdiction=ocd-jurisdiction/country:us/state:il/place:chicago/government&updated_at__gt=2017-02-04&page=%d"
 
 while page_num:

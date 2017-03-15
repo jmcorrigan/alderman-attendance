@@ -3,9 +3,9 @@ from datetime import datetime
 reload(sys)    
 sys.setdefaultencoding('utf-8')
 
-writer = csv.writer(open('attendance.csv', 'w'))
-terms = csv.reader(open('committee_terms_clean.csv', 'rU'))
-meetings = csv.reader(open('who_there.csv', 'rU'))
+writer = csv.writer(open('/data/raw_data/attendance.csv', 'w'))
+terms = csv.reader(open('/data/clean_data/committee_terms_clean.csv', 'rU'))
+meetings = csv.reader(open('/data/raw_data/who_there.csv', 'rU'))
 
 meetings_record = {}
 

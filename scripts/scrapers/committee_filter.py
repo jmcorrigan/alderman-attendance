@@ -1,6 +1,6 @@
 import requests, csv
 
-writer = csv.writer(open('committee_participation.csv', 'w'))
+writer = csv.writer(open('/data/raw_data/committee_participation.csv', 'w'))
 
 def body_offices():
 
