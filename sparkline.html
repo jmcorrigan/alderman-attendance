@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-1.10.0.js"></script>
+    <script type="text/javascript" src="http://omnipotent.net/jquery.sparkline/2.1.2/jquery.sparkline.js"></script>
+    <link rel="stylesheet" type="text/css" href="table.css">
+    <script>
+        $(function() {
+
+            $.ajax({
+                type: "GET",
+                url: 'data/extras/html_table_committees.csv',
+                dataType: "text",
+            }).done(successFunction);
+
+            function cleanArray(actual) {
+              var newArray = new Array();
+              for (var i = 0; i < actual.length; i++) {
+                if (actual[i]) {
+                  newArray.push(actual[i]);
+                }
+              }
+              return newArray;
+            }
+            function successFunction(data) {
+                var allRows = data.split(/\r?\n|\r/);
+                var table = '<table id="sparkTable">';
+                for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
+                    if (singleRow === 0) {
+                        table += '<thead>';
+                        table += '<tr>';
+                    } 
+                    else {
+                        table += '<tr>';
+                    }
+
+                    var rowCells = allRows[singleRow].split(',');
+                    var sparkArray = rowCells.slice(6,rowCells.length);
+                    var shortsparkArray = cleanArray(sparkArray);
+
+                    for (var rowCell = 0; rowCell < 7; rowCell++) {
+                        // console.log(rowCells[6..30]) Grab a range of indices.
+                        if (singleRow === 0) {
+                            table += '<th>';
+                            table += rowCells[rowCell];
+                            table += '</th>';
+                        } 
+                        else {
+                            if (rowCell < 3) {
+                                table += '<td class="identifier">';
+                                table += rowCells[rowCell];
+                                table += '</td>';
+                            }
+
+                            else if (rowCell < 6) {
+                                table += '<td class="attendance">';
+                                table += rowCells[rowCell];
+                                table += '</td>';
+                            }
+                            else {
+                                table += '<td class="sparkline"><span class="inlinesparkline">';
+                                table += sparkArray;
+                                table += '</span></td>';
+                            }
+                        }
+                    }
+
+                    if (singleRow === 0) {
+                        table += '</tr>';
+                        table += '</thead>';
+                        table += '<tbody>';
+                    } 
+                    else {
+                        table += '</tr>';
+                    }
+                } 
+                table += '</tbody>';
+                table += '</table>';
+                $('body').append(table);
+
+                $(".inlinesparkline").sparkline('html', {
+                    type: 'line',
+                    width: '175',
+                    height: '50',
+                    lineColor: '#0000f0',
+                    fillColor: '#c0d0f0',
+                    lineWidth: 1,
+                    chartRangeMin: 0,
+                    chartRangeMax: 1,
+                    chartRangeMinX: 0,
+                    chartRangeMaxX: 24,
+                    spotColor: '#ef003f',
+                    minSpotColor: '#f02020',
+                    maxSpotColor: '#50f050'
+                })
+                $(".attendance").each(function() {
+                    var percentage = $(this).html().replace('%','');
+                    if (percentage > 97) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.05)');
+                    }
+                    else if (percentage > 90) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.13)');
+                    }
+                    else if (percentage > 85) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.2)');
+                    }
+                    else if (percentage > 80) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.25)');
+                    }
+                    else if (percentage > 75) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.35)');
+                    }
+                    else if (percentage > 70) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.45)');
+                    }
+                    else if (percentage > 65) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.55)');
+                    }
+                    else if (percentage > 60) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.62)');
+                    }
+                    else if (percentage > 55) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.67)');
+                    }
+                    else if (percentage > 50) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.73)');
+                    }
+                    else if (percentage > 45) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.82)');
+                    }
+                    else if (percentage > 41) {
+                        $(this).css("background-color", 'rgba(196,0,0,0.9)');
+                    }
+                    else {
+                        $(this).css("background-color", 'rgba(196,0,0,1)');
+                    }
+                });
+            }
+        }); 
+
+    </script>
+</head>
+<body>
+
+   <!-- Table-->
+
+</body>
+</html>
